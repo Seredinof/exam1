@@ -1,5 +1,5 @@
 <template>
-    <router-link v-bind:class="['article', type == 'double' ? 'article_type_double' : '']" :to="`/${id}`">
+    <router-link v-bind:class="['article', type == 'double' ? 'article_type_double' : '']" :to="`/article/${id}`">
         <div class="article__in">
             <h2 class="article__title">{{ title }}</h2>
             <p class="article__description">{{ description }}</p>
@@ -22,7 +22,6 @@ export default {
     text-decoration: none;
     
     /* old browsers >*/
-    display: inline-block;
     float: left;
     min-height: 300px;
     width: 100%;

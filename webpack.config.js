@@ -11,7 +11,11 @@ module.exports = {
 
     entry: join( __dirname, 'src/index.js' ),
 
-    output: join( __dirname, 'public/bundle.js' ),
+    output: {
+        path: join( __dirname, './public' ),
+        publicPath: '/public/',
+        filename: 'bundle.js'
+    },
 
     resolve: {
         modules: [
@@ -36,13 +40,13 @@ module.exports = {
     },
 
     plugins: [
-        new HtmlPlugin({
-            filename: 'index.html',
-            template: HtmlTemplatePlugin,
-            inject: false,
-            mobile: true,
-            appMountId: 'app',
-        }),
+        // new HtmlPlugin({
+        //     filename: 'index.html',
+        //     template: HtmlTemplatePlugin,
+        //     inject: false,
+        //     mobile: true,
+        //     appMountId: 'app',
+        // }),
 
         new webpack.DefinePlugin({
             'process.env': {
@@ -52,12 +56,10 @@ module.exports = {
     ],
 
     devServer: {
-        contentBase: './public/',
+        historyApiFallback: true,
+        //contentBase: './public/',
         hot: true,
         port: 9000,
-        historyApiFallback: true,
-        noInfo: true,
-        overlay: true,
         setup(app) {
             app.get('/api/tiles', function(req, res)  {
                 res.writeHead(200, { 'Content-Type' : 'application/json' });

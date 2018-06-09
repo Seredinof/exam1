@@ -7,16 +7,38 @@
 <script>
 
 import axios from 'axios'
+import { mapGetters } from 'vuex'
 
 export default {
-    computed: {
-        tile() {
-            return this.$store.getters.getTileById(parseInt(this.$route.params.id))
+    data() {
+        return {
+            
         }
     },
-    mounted() {
-        if(!this.$store.state.tiles.length) {
+    computed: {
+        tile() {
+            return this.$store.getters.getTileById(parseInt(this.$route.params.id));
+        },
+        loaded () {
+            return this.$store.state.loaded
+        }
+    },
+    watch: {
+        loaded: function () {
+            this.isNotFound ()
+        }
+    },
+    created () {
+        if(!this.loaded) {
             this.$store.dispatch('getTiles');
+        }
+        this.isNotFound ();
+    },
+    methods: {
+        isNotFound () {
+            if(this.loaded && this.tile === undefined) {
+                this.$router.push('/404');
+            }
         }
     }
 }

@@ -1,13 +1,15 @@
 <template>
     <div>
-      <router-view></router-view>
+        404
     </div>
 </template>
+
 <script>
-
-import axios from 'axios'
-
 export default {
     
 }
 </script>
+
+<style>
+
+</style>
